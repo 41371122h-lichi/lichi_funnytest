@@ -6,35 +6,62 @@
   <title>韓國宮廷漫畫轉生測驗</title>
   <style>
     :root{
-      --bg:#f5f1fb;
-      --card:#ffffff;
-      --accent:#bfa5ff; 
-      --accent-600:#9a7bff;
-      --text:#2b2b2b;
-      --muted:#6b6b6b;
-      --shadow: 0 8px 24px rgba(120,100,200,0.08);
-      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans TC', sans-serif;
+    --bg: #1a0b2e; 
+    --card: #ffffff;
+    --accent: #bfa5ff; 
+    --accent-600: #9a7bff;
+    --text: #2b2b2b;
+    --muted: #6b6b6b;
+    --shadow: 0 8px 24px rgba(0,0,0,0.3);
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans TC', sans-serif;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      background: linear-gradient(180deg, var(--bg) 0%, #fbf9ff 100%);
-      color:var(--text);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+    margin:0;
+    background: linear-gradient(180deg, #2d1b4e 0%, #1a0b2e 100%);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative; 
+    overflow-x: hidden; 
     }
-    .wrap{
-      width:100%;
-      max-width:820px;
-      background:var(--card);
-      border-radius:16px;
-      padding:28px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(140,110,255,0.06);
+
+  .wrap{
+    width: 100%;
+    max-width: 820px;
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(140,110,255,0.06);
+    position: relative; 
+    z-index: 10; 
     }
+    .particle {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none; 
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.6); 
+    z-index: 1; 
+    }
+    @keyframes float-glow {
+    0% {
+      opacity: 0;
+      transform: translateY(0) scale(0.5);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translateY(-20px) scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-40px) scale(0.5);
+    }
+   }
     header{display:flex;gap:16px;align-items:center;margin-bottom:12px}
     .logo{
       width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-600));color:white;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(154,123,255,0.18);
@@ -60,6 +87,13 @@
     .meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
     button{background:var(--accent-600);border:none;color:white;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
     button.ghost{background:transparent;color:var(--accent-600);border:1px solid rgba(154,123,255,0.14)}
+    button.share-action {
+      display: flex; align-items: center; justify-content: center; width: 100%; margin-bottom: 8px; font-size: 15px;
+    }
+    button.share-fb { background: #1877F2; color: white; border: none; }
+    button.share-line { background: #06C755; color: white; border: none; }
+    button.share-copy { background: #555; color: white; border: none; }
+
     a.button{
       background:var(--accent-600);border:none;color:white;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;
       text-decoration: none; 
@@ -105,10 +139,19 @@
     .trait-list{display:flex;gap:8px;flex-wrap:wrap}
     .trait-pill{background:linear-gradient(90deg,#fff,#fbfaff);padding:6px 10px;border-radius:999px;border:1px solid rgba(150,120,255,0.06);font-weight:600}
 
-    footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
+    footer {
+    margin-top: 12px;
+    text-align: center;
+    color: rgba(255,255,255,0.6); 
+    font-size: 13px;
+    position: relative;
+    z-index: 10;
+    }
 
-    .role-image { display: none; }
-    
+    .btn-group {
+      display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
+    }
+
     @media(max-width: 640px) {
       body {
         padding: 16px; 
@@ -182,8 +225,14 @@
         gap: 8px;
         width: 100%;
       }
-      .meta button, .result button, .result a.button {
-        width: 100%; 
+      .btn-group button, .btn-group a.button {
+        flex: 1;
+        width: auto;
+        min-width: 120px;
+      }
+      .btn-group {
+         flex-direction: row;
+         justify-content: space-between;
       }
 
       [style*="position:fixed"] {
@@ -204,6 +253,25 @@
       [style*="position:fixed"] > div button {
         width: auto;
       }
+    }
+    .options.compact {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    @media(min-width: 640px){
+      .options.compact {
+        grid-template-columns: 1fr 1fr 1fr 1fr; 
+      }
+    }
+
+    .options.compact .opt {
+      padding: 10px 4px; 
+      font-size: 14px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%; 
     }
   </style>
 </head>
@@ -242,6 +310,19 @@
 
   <script>
     const questions = [
+        { 
+          text: "在測驗開始前，憑直覺猜猜看你覺得自己會是哪一種角色？",
+          options: [
+            { text: "佩妮洛普(智力代表)", points: {} },
+            { text: "蕾奧妮(武力代表)", points: {} },
+            { text: "賽琳娜(演技代表)", points: {} },
+            { text: "雷普莉(搞笑代表)", points: {} },
+            { text: "赫斯提雅(堅決代表)", points: {} },
+            { text: "伊迪絲(溫柔代表)", points: {} },
+            { text: "黛寶拉(瘋癲代表)", points: {} },
+            { text: "娜美亞(鈍感代表)", points: {} }
+          ]
+        },
         { text: "請問你在現代的忙碌程度是？",
           options: [
             { text: "每天都很忙", points: { 智力: 1 } },
@@ -273,7 +354,7 @@
         { text: "意識到是真的穿越了之後，你認為你的行為和個性會產生什麼樣的改變？",
           options: [
             { text: "努力適應他們的禮儀和價值觀", points: { 溫柔: 1, 演技: 2, 智力: 1, 堅決: 1 } },
-            { text: "對其他人還是像在現代一樣大喇喇的", points: { 瘋度: 2, 鈍感: 2, 搞笑: 1, 演技: -2 } },
+            { text: "對其他人還是像在現代一樣大喇喇的", points: { 瘋度: 2, 鈍感: 2, 搞笑: 2, 演技: -2 } },
             { text: "開始很謹慎、疑神疑鬼地", points: { 瘋度: 2, 武力: 2 } },
             { text: "對這個世界提不起勁，很憂鬱", points: { 堅決: -1, 瘋度: 1 } }
           ]},
@@ -287,7 +368,7 @@
         { text: "在宮廷宴會中，你最關心的事情是？",
           options: [
             { text: "我的朋友們在聊什麼天", points: { 演技: 2, 溫柔: 2 } },
-            { text: "公爵大人還是一如往常地帥氣", points: { 鈍感: 2 , 搞笑: 2 } },
+            { text: "公爵大人還是一如往常地帥氣", points: { 鈍感: 2 , 搞笑: 3 } },
             { text: "今天有什麼甜點", points: { 搞笑: 2 } },
             { text: "南方商會最近的資金流向", points: { 智力: 2, 鈍感: -1 } }
           ]},
@@ -302,7 +383,7 @@
           options: [
             { text: "現身並跟他們理性解釋", points: { 智力: 1, 溫柔: 2, 演技: 1 } },
             { text: "沉默但之後行動證明一切", points: { 堅決: 2, 智力:1, 溫柔: 2 } },
-            { text: "用金錢安撫大家，也當封口費", points: { 演技: 1, 溫柔: 2 } },
+            { text: "用金錢安撫大家，也當封口費", points: { 演技: 1, 溫柔: 2, 搞笑: 1 } },
             { text: "把說壞話的人都直接解決掉", points: { 瘋度: 2, 武力: 2, 堅決: 1} }
           ]},
         { text: "如果有一個可以跟超帥公爵認識的契機，你覺得是？",
@@ -323,7 +404,7 @@
           options: [
             { text: "協助好的領導者登基，讓民眾安居樂業", points: { 智力: 2, 武力: 2, 堅決: 1 } },
             { text: "成為家主，帶領家族走向繁榮", points: { 武力: 2, 堅決: 2, 溫柔: 1 } },
-            { text: "我都自顧不暇了，顧好自己就好", points: { 瘋度: 2, 鈍感: 2, 搞笑: 1, 智力: -2 } },
+            { text: "我都自顧不暇了，顧好自己就好", points: { 瘋度: 2, 鈍感: 2, 搞笑: 2, 智力: -2 } },
             { text: "跟大家好好相處，成為社交之花", points: { 溫柔: 2, 演技: 2, 搞笑: 1 } }
           ]}
     ];
@@ -345,7 +426,9 @@
       qinfo.textContent = `第 ${idx+1} / ${questions.length} 題`;
       prog.style.width = `${Math.round(((idx)/questions.length)*100)}%`;
 
-      let html = `\n        <div class=\"question\">${q.text}</div>\n        <div class=\"options\">`;
+      const gridClass = q.options.length > 4 ? 'options compact' : 'options';
+      let html = `\n        <div class=\"question\">${q.text}</div>\n        <div class=\"${gridClass}\">`;
+
       q.options.forEach((opt, i)=>{
         const sel = answers[idx] === i ? 'selected' : '';
         html += `<div class=\"opt ${sel}\" data-i=\"${i}\">${opt.text}</div>`;
@@ -461,8 +544,9 @@
                   </div>
               </div>`;
       
-      html += `<div style=\"display:flex;gap:8px;margin-top:14px\">
+      html += `<div class="btn-group">
                   <button id=\"retry\">再測一次</button>
+                  <button id=\"shareBtn\">分享結果</button>
                   ${comicButtonHtml} 
                   <button id=\"detail\" class=\"ghost\">查看完整解讀</button>
               </div>`;
@@ -491,12 +575,71 @@
           }
       }
 
+      document.getElementById('shareBtn').addEventListener('click', ()=>{
+          const shareHtml = document.createElement('div');
+          shareHtml.style.position='fixed';
+          shareHtml.style.left=0;shareHtml.style.top=0;shareHtml.style.right=0;shareHtml.style.bottom=0;
+          shareHtml.style.display='flex';shareHtml.style.alignItems='center';shareHtml.style.justifyContent='center';
+          shareHtml.style.background='rgba(10,10,10,0.5)';
+          shareHtml.style.zIndex='1000';
+
+          const url = encodeURIComponent(window.location.href);
+          const title = encodeURIComponent(`我在韓國宮廷漫畫轉生測驗中，測出來的角色是：${r.title}！快來玩玩看！`);
+
+          shareHtml.innerHTML = `
+            <div style="background:white;padding:24px;border-radius:12px;width:90%;max-width:320px;text-align:center;">
+              <h3 style="margin:0 0 16px;">分享測驗結果</h3>
+              <button class="share-action share-fb" id="btnFB">分享到 Facebook</button>
+              <button class="share-action share-line" id="btnLine">分享到 LINE</button>
+              <button class="share-action share-copy" id="btnCopy">複製連結</button>
+              <button id="closeShare" class="ghost" style="margin-top:12px;width:100%">取消</button>
+            </div>
+          `;
+
+          document.body.appendChild(shareHtml);
+
+          document.getElementById('btnFB').addEventListener('click', ()=>{
+              window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`, '_blank');
+          });
+
+          document.getElementById('btnLine').addEventListener('click', ()=>{
+              window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${title}`, '_blank');
+          });
+
+          document.getElementById('btnCopy').addEventListener('click', ()=>{
+              const textToCopy = `${decodeURIComponent(title)}\n${decodeURIComponent(url)}`;
+              if (navigator.clipboard) {
+                  navigator.clipboard.writeText(textToCopy).then(() => {
+                      alert('連結已複製到剪貼簿！');
+                      document.body.removeChild(shareHtml);
+                  }).catch(err => {
+                      alert('複製失敗，請手動複製網址');
+                  });
+              } else {
+                  // Fallback for older browsers
+                  const textArea = document.createElement("textarea");
+                  textArea.value = textToCopy;
+                  document.body.appendChild(textArea);
+                  textArea.select();
+                  document.execCommand("Copy");
+                  textArea.remove();
+                  alert('連結已複製到剪貼簿！');
+                  document.body.removeChild(shareHtml);
+              }
+          });
+
+          document.getElementById('closeShare').addEventListener('click', ()=>{ 
+              document.body.removeChild(shareHtml); 
+          });
+      });
+
       document.getElementById('detail').addEventListener('click', ()=>{
         const detailHtml = document.createElement('div');
         detailHtml.style.position='fixed';
         detailHtml.style.left=0;detailHtml.style.top=0;detailHtml.style.right=0;detailHtml.style.bottom=0;
         detailHtml.style.display='flex';detailHtml.style.alignItems='center';detailHtml.style.justifyContent='center';
         detailHtml.style.background='rgba(10,10,10,0.35)';
+        detailHtml.style.zIndex='1000';
 
         let detailedContent = `<h3 style="margin:0 0 16px;">完整解讀</h3>`; 
         
@@ -530,6 +673,34 @@
     }
 
     renderQuestion(current);
+
+    function createParticles() {
+    const particleCount = 40;
+    const body = document.body;
+
+    for (let i = 0; i < particleCount; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+
+      const size = Math.random() * 3 + 2;
+
+      const duration = Math.random() * 5 + 3;
+      const delay = Math.random() * 5;
+
+      p.style.left = `${x}vw`;
+      p.style.top = `${y}vh`;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.animation = `float-glow ${duration}s ease-in-out ${delay}s infinite`;
+
+      body.appendChild(p);
+    }
+  }
+
+  createParticles();
   </script>
 </body>
 </html>
