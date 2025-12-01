@@ -513,14 +513,14 @@
 
     function showResult(topTrait, tiedTraits){
       const roles = {
-        智力: { title:'反派角色只有死亡結局-佩妮洛普', image:'images/智力.jpg', link:'', desc:'你如同佩妮洛普般機智過人，陰謀與計畫都難不倒你，是宮內外的謀略代表，但也要小心過於聰明可能會樹大招風。' },
-        武力: { title:'我成為了男主的養女-蕾奧妮', image:'images/武力.jpeg', link:'', desc:'你如同蕾奧妮般擁有驚人的力量，可以使用這股力量壓制他人，達成目標。' },
-        演技: { title:'魅惑北方公爵-賽琳娜', image:'images/演技.jpeg', link:'https://www.webtoons.com/zh-hant/western-palace/charming-the-duke-of-the-north/list?title_no=4815', desc:'你如同賽琳娜般演技過人，在他人面前劇本張嘴就來，可以說是靠著你的才貌雙全在宮中有著舉足輕重的地位。' },
-        搞笑: { title:'我奪走了公爵的初夜-雷普莉', image:'images/搞笑.jpeg', link:'https://www.webtoons.com/zh-hant/western-palace/firstnight/list?title_no=2115', desc:'你如同雷普莉般直率且有趣，懂得利用你天生的幽默感去接近他人，讓他人放下戒心並成為你穿越後的支柱。' },
-        堅決: { title:'拯救被遺棄的本命角色-赫斯提雅', image:'images/堅決.jpg', link:'https://www.webtoons.com/zh-hant/western-palace/for-my-derelict-favorite/list?title_no=4762', desc:'你如同赫斯提雅般擁有一顆堅定的心，無論發生了什麼情況都只想保護你最愛的人，但也請你也好好愛自己後再愛其他人，別讓自己受傷。' },
-        溫柔: { title:'以為只是普通的穿越-伊迪絲', image:'images/溫柔.jpeg', link:'https://www.webtoons.com/zh-hant/western-palace/not-your-typical-reincarnation-story/list?title_no=5574', desc:'你如同伊迪絲般有著溫柔待人的性格，雖然有時會躊躇不決，但也是因為這樣的個性，讓很多強勢的人產生了保護心理，成為你的支柱。' },
-        瘋度: { title:'因為是惡女所以很安逸-黛寶拉', image:'images/瘋度.jpeg', link:'', desc:'你如同黛寶拉般瘋狂，但卻總是智力在線，懂得在眾人面前瘋瘋癲癲的同時，一邊在腦袋裡面掌握局面，懂你的人會覺得很有魅力。' },
-        鈍感: { title:'基層公務員想晉升-娜美亞', image:'images/鈍感.jpg', link:'', desc:'你如同娜美亞般情緒波瀾不大，但是腦海裡卻會暗暗計算各種事情，雖然有鈍感力這件事不會讓討厭你的人對你造成傷害，不過還是可以試試看感受一下周遭的氛圍也不錯！' }
+        智力: { title:'反派角色只有死亡結局-佩妮洛普(智力代表)', image:'images/智力.jpg', link:'', desc:'你如同佩妮洛普般機智過人，陰謀與計畫都難不倒你，是宮內外的謀略代表，但也要小心過於聰明可能會樹大招風。' },
+        武力: { title:'我成為了男主的養女-蕾奧妮(武力代表)', image:'images/武力.jpeg', link:'', desc:'你如同蕾奧妮般擁有驚人的力量，可以使用這股力量壓制他人，達成目標。' },
+        演技: { title:'魅惑北方公爵-賽琳娜(演技代表)', image:'images/演技.jpeg', link:'https://www.webtoons.com/zh-hant/western-palace/charming-the-duke-of-the-north/list?title_no=4815', desc:'你如同賽琳娜般演技過人，在他人面前劇本張嘴就來，可以說是靠著你的才貌雙全在宮中有著舉足輕重的地位。' },
+        搞笑: { title:'我奪走了公爵的初夜-雷普莉(搞笑代表)', image:'images/搞笑.jpeg', link:'https://www.webtoons.com/zh-hant/western-palace/firstnight/list?title_no=2115', desc:'你如同雷普莉般直率且有趣，懂得利用你天生的幽默感去接近他人，讓他人放下戒心並成為你穿越後的支柱。' },
+        堅決: { title:'拯救被遺棄的本命角色-赫斯提雅(堅決代表)', image:'images/堅決.jpg', link:'https://www.webtoons.com/zh-hant/western-palace/for-my-derelict-favorite/list?title_no=4762', desc:'你如同赫斯提雅般擁有一顆堅定的心，無論發生了什麼情況都只想保護你最愛的人，但也請你也好好愛自己後再愛其他人，別讓自己受傷。' },
+        溫柔: { title:'以為只是普通的穿越-伊迪絲(溫柔代表)', image:'images/溫柔.jpeg', link:'https://www.webtoons.com/zh-hant/western-palace/not-your-typical-reincarnation-story/list?title_no=5574', desc:'你如同伊迪絲般有著溫柔待人的性格，雖然有時會躊躇不決，但也是因為這樣的個性，讓很多強勢的人產生了保護心理，成為你的支柱。' },
+        瘋度: { title:'因為是惡女所以很安逸-黛寶拉(瘋癲代表)', image:'images/瘋度.jpeg', link:'', desc:'你如同黛寶拉般瘋狂，但卻總是智力在線，懂得在眾人面前瘋瘋癲癲的同時，一邊在腦袋裡面掌握局面，懂你的人會覺得很有魅力。' },
+        鈍感: { title:'基層公務員想晉升-娜美亞(鈍感代表)', image:'images/鈍感.jpg', link:'', desc:'你如同娜美亞般情緒波瀾不大，但是腦海裡卻會暗暗計算各種事情，雖然有鈍感力這件事不會讓討厭你的人對你造成傷害，不過還是可以試試看感受一下周遭的氛圍也不錯！' }
       };
 
       const r = roles[topTrait] || roles['智力'];
