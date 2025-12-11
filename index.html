@@ -152,6 +152,40 @@
       display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
     }
 
+    .home-btn {
+      position: fixed; 
+      top: 24px;
+      left: 24px;
+      z-index: 100; 
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.1); 
+      border: 1px solid rgba(255, 255, 255, 0.2); 
+      border-radius: 30px; 
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      backdrop-filter: blur(4px); 
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .home-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px); 
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+    .home-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor; 
+    }
+
     @media(max-width: 640px) {
       body {
         padding: 16px; 
@@ -253,6 +287,12 @@
       [style*="position:fixed"] > div button {
         width: auto;
       }
+      .home-btn {
+        top: 12px;
+        left: 12px;
+        padding: 6px 12px;
+        font-size: 13px;
+      }
     }
     .options.compact {
       grid-template-columns: 1fr 1fr;
@@ -276,6 +316,12 @@
   </style>
 </head>
 <body>
+  <a href="https://psychological-test-full-ver.onrender.com" class="home-btn" aria-label="回首頁">
+  <svg viewBox="0 0 24 24">
+    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  回首頁
+  </a>
   <div class="wrap" role="application">
     <header>
       <div class="logo"><img src="images/logo_img.jpg" alt="Logo"></div>
